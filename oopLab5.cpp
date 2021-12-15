@@ -80,6 +80,7 @@ int main()
 	func1();
 	func2();
 	Base* pBase = &func3();
+	//delete pBase;			// this thing will delete uninitialized memory and will cause an error
 	pBase = &better_func3(obj);
 	pBase = &better_func3(descObj);
 	cout << "\n";
