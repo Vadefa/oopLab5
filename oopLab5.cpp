@@ -3,14 +3,22 @@
 using namespace std;
 class Point {
 public:
+	void method1() {
+		cout << "Point: method1()\n";
+		method2();
+	}
+	/*virtual */void method2() {
+		cout << "Point: method2()\n";
+	}
+
 	void overrided() {
-		cout << "(overrided): Point\n";
+		cout << "Point: overrided()\n";
 	}
 	virtual void overlappedBase() {
-		cout << "(overlapped in Point): Point\n";
+		cout << "Point: overrided()\n";
 	}
 	void overlappedDesc() {
-		cout << "(overlapped in Point2D): Point\n";
+		cout << "Point: overlappedDesc()\n";
 	}
 
 	Point() {
@@ -22,14 +30,18 @@ public:
 };
 class Point2D : public Point {
 public:
+	void method2() {
+		cout << "Point2D: method2()\n";
+	}
+
 	void overrided() {
-		cout << "(overrided): Point2D\n";
+		cout << "Point2D: overrided()\n";
 	}
 	void overlappedBase() {
-		cout << "(overlapped in Point): Point2D\n";
+		cout << "Point2D: overlappedBase()\n";
 	}
 	void overlappedDesc() {
-		cout << "(overlapped in Point2D): Point2D\n";
+		cout << "Point2D: overridedDesc()\n";
 	}
 
 	Point2D(){
@@ -42,6 +54,12 @@ public:
 
 int main()
 {
+	cout << "Method 1 and method 2 are defined in the Base class. Method 2 is also overrided in the Descendant class." << endl
+		<< "Let's check what method will be called if we create a descendant object and call method1:\n";
+	Point2D p2d;
+	p2d.method1();
+
+
 	cout << "The first case: creating a pointer of a Base class, object of a Base class:\n";
 	Point* pointer = new Point;
 	pointer->overrided();
