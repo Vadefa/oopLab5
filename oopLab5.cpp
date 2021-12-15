@@ -68,9 +68,13 @@ int main()
 		if (p[i]->classname() == "Line")					// this breaks the incapsulation rule
 			((Line*)p[i])->eraseLine();						// and this is unsafe type conversion
 
+	cout << "\n";
+
 	for (int i = 0; i < n; i++)
 		if (p[i]->isA("Section"))
 			((Section*)p[i])->eraseSection();				// this is still not so safe, but better then before
+
+	cout << "\n";
 
 	for (int i = 0; i < n; i++) {
 		if (dynamic_cast<Line*>(p[i]) != NULL)
