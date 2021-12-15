@@ -3,40 +3,85 @@
 using namespace std;
 class Point {
 public:
-	
-	void method1() {
-		cout << "Point: Method1()\n";
-		method2();
+	virtual string classname() {
+		return "Point";
 	}
-	/*virtual */void method2() {
-		cout << "Point: Method2()\n";
+
+	virtual bool isA(string name) {
+		return (name == classname());		// let's use the method classname() to not writing "Point" twice
 	}
 
 	Point() {
-		cout << "Point()\n";
 	}
 	virtual ~Point() {
-		cout << "~Point\n";
 	}
 };
-class Point2D : public Point {
+class Line : public Point {
 public:
-	void method2() {
-		cout << "Point2d: Method2();\n";
+	string classname() {
+		return "Line";
 	}
 
-	Point2D(){
-		cout << "Point2d()\n";
+	bool isA(string name) {
+		return (name == classname());
 	}
-	~Point2D() {
-		cout << "~Point2D\n";
+
+	void eraseLine() {
+		cout << "A line was erased\n";
+	}
+
+	Line(){
+	}
+	~Line() {
+	}
+};
+class Section : public Point {
+public:
+	string classname() {
+		return "Section";
+	}
+
+	bool isA(string name) {
+		return (name == classname());
+	}
+
+	void eraseSection() {
+		cout << "A section was erased\n";
+	}
+	Section() {
+	}
+	~Section() {
 	}
 };
 
 int main()
 {
-	Point2D pointer2d;
-	pointer2d.method1();
+	const int n = 10;
+	Point* p[n];
+	for (int i = 0; i < n; i++)
+		if (i % 2 == 0)
+			p[i] = new Line;
+		else
+			p[i] = new Section;
+
+	for (int i = 0; i < n; i++)
+		if (p[i]->classname() == "Line")					// this breaks the incapsulation rule
+			((Line*)p[i])->eraseLine();						// and this is unsafe type conversion
+
+	for (int i = 0; i < n; i++)
+		if (p[i]->isA("Section"))
+			((Section*)p[i])->eraseSection();				// this is still not so safe, but better then before
+
+	for (int i = 0; i < n; i++) {
+		if (dynamic_cast<Line*>(p[i]) != NULL)
+			dynamic_cast<Line*>(p[i])->eraseLine();
+		else if (dynamic_cast<Section*>(p[i]) != NULL)
+			dynamic_cast<Section*>(p[i])->eraseSection();	// and this is the safe type conversion
+	}
+
+	cout << "\n";
+
+	//for (int i = 0; i < 10; i++)
 
 	return 0;
 }
