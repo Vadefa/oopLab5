@@ -59,6 +59,7 @@ int main()
 	Point2D p2d;
 	p2d.method1();
 
+	cout << "\n";
 
 	cout << "The first case: creating a pointer of a Base class, object of a Base class:\n";
 	Point* pointer = new Point;
