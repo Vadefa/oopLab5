@@ -71,10 +71,17 @@ int main()
 
 	Desc descObj2(&descObj);
 	Desc descObj3(descObj2);
+	cout << "\n";
+
+	
+	func1();
+	func2();
+	func3();
+	better_func3(obj);
+	better_func3(descObj);
 
 	return 0;
 }
-
 
 
 
