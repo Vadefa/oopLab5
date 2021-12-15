@@ -44,6 +44,22 @@ void func3(Base& obj) {
 	cout << "We got an adress of an object\n";
 };
 
+Base func1();
+Base* func2();
+Base& func3();
+Base& better_func3(Base& obj);
+
+
+int main()
+{
+	
+
+	return 0;
+}
+
+
+
+
 Base func1() {
 	cout << "Base func()\n";
 	Base obj;
@@ -76,19 +92,12 @@ Base& func3() {
 	return obj;			// obj returns by an adress.
 						// But by the end of a field of view of this function object obj will be deleted..
 						// And the pointer that will get this adress will be the hanging pointer.
-};								
+};
 Base& better_func3(Base& obj) {
 	cout << "Base& finc(Base& obj)\n";
 	return obj;			// And here we won't get in the result any hanging pointers.
 
 	//This way of return also allows to return an adress on the dynamically initialized memory.
 	//It also have the same problems with hanging pointers.
-	//We should use this way of return with getting some parameters as adresses.
-}
-
-int main()
-{
-	
-
-	return 0;
+	//Better use this way of return with getting some parameters as adresses.
 }
