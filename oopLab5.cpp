@@ -14,7 +14,7 @@ public:
 	}
 	Point() {
 	}
-	~Point() {
+	virtual ~Point() {
 	}
 };
 class Point2D : Point {
