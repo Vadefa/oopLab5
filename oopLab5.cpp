@@ -1,89 +1,61 @@
 ﻿#include <iostream>
 
 using namespace std;
-class Point {
+class Base {
 public:
-	virtual string classname() {
-		return "Point";
+	
+	Base() {
+		cout << "Base: Base()\n";
 	}
-
-	virtual bool isA(string name) {
-		return (name == classname());		// let's use the method classname() to not writing "Point" twice
+	Base(Base* obj) {
+		cout << "Base: Base(Base* obj)\n";
 	}
-
-	Point() {
+	Base(Base& obj) {
+		cout << "Base: Base(Base& obj)\n";
 	}
-	virtual ~Point() {
+	virtual ~Base() {
+		cout << "Base: ~Base()\n";
 	}
 };
-class Line : public Point {
+class Desc: public Base{
 public:
-	string classname() {
-		return "Line";
-	}
 
-	bool isA(string name) {
-		return (name == classname());
+	Desc() {
+		cout << "Desc: Desc()\n";
 	}
-
-	void eraseLine() {
-		cout << "A line was erased\n";
+	Desc(Desc* obj) {
+		cout << "Desc: Desc(Desc* obj)\n";
 	}
-
-	Line(){
+	Desc(Desc& obj) {
+		cout << "Desc: Desc(Desc& obj)\n";
 	}
-	~Line() {
+	~Desc() {
+		cout << "Desc: ~Desc()\n";
 	}
 };
-class Section : public Point {
-public:
-	string classname() {
-		return "Section";
-	}
 
-	bool isA(string name) {
-		return (name == classname());
-	}
+void func1(Base obj) {
+	cout << "We got an object and created its copy\n";
+};
+void func2(Base* obj) {
+	cout << "We got a pointer of an object\n";
+};
+void func3(Base& obj) {
+	cout << "We got an adress of an object\n";
+};
 
-	void eraseSection() {
-		cout << "A section was erased\n";
-	}
-	Section() {
-	}
-	~Section() {
-	}
+Base func1() {
+};
+
+Base* func2() {
+};
+
+Base& func3() {
 };
 
 int main()
 {
-	const int n = 10;
-	Point* p[n];
-	for (int i = 0; i < n; i++)
-		if (i % 2 == 0)
-			p[i] = new Line;
-		else
-			p[i] = new Section;
-
-	for (int i = 0; i < n; i++)
-		if (p[i]->classname() == "Line")					// this breaks the incapsulation rule
-			((Line*)p[i])->eraseLine();						// and this is unsafe type conversion
-
-	cout << "\n";
-
-	for (int i = 0; i < n; i++)
-		if (p[i]->isA("Section"))
-			((Section*)p[i])->eraseSection();				// this is still not so safe, but better then before
-
-	cout << "\n";
-
-	for (int i = 0; i < n; i++) {
-		if (dynamic_cast<Line*>(p[i]) != NULL)
-			dynamic_cast<Line*>(p[i])->eraseLine();
-		else if (dynamic_cast<Section*>(p[i]) != NULL)
-			dynamic_cast<Section*>(p[i])->eraseSection();	// and this is the safe type conversion
-	}
-
-	cout << "\n";
+	
 
 	return 0;
 }
