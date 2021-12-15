@@ -79,9 +79,10 @@ int main()
 	
 	func1();
 	func2();
-	func3();
-	better_func3(obj);
-	better_func3(descObj);
+	Base* pBase = &func3();
+	pBase = &better_func3(obj);
+	pBase = &better_func3(descObj);
+	cout << "\n";
 
 	return 0;
 }
@@ -91,7 +92,7 @@ int main()
 Base func1() {
 	cout << "Base func()\n";
 	Base obj;
-	return obj; // or return it on adress &obj
+	return obj; // here the compiler creates a copy of an obj and returns it
 
 	//This way of return allows to work easily with static variabels and simple objects.
 	//But when we need to return arrays, pointers or complex objects we'd better use functions,..
