@@ -45,13 +45,28 @@ void func3(Base& obj) {
 };
 
 Base func1() {
+	cout << "Base func()\n";
+	Base obj;
+	return obj; // &obj;
 };
 
 Base* func2() {
+	cout << "Base* func()\n";
+	Base* obj;
+	return obj;
+
+	/*
+	Base obj;
+	return &obj;		- our obj will be deleted after the work of a function so we'll get a pointer to uninitialized memory
+						Pointer that will get this adress will be called a hanging pointer (висячий указатель)
+	*/
 };
 
 Base& func3() {
-};
+	cout << "Base& func()\n";
+	Base obj;
+	return obj;					
+};								
 
 int main()
 {
