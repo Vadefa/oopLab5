@@ -3,14 +3,16 @@
 using namespace std;
 class Base {
 public:
-	
+	int x = 3;
 	Base() {
 		cout << "Base: Base()\n";
 	}
 	Base(Base* obj) {
+		x = obj->x;
 		cout << "Base: Base(Base* obj)\n";
 	}
 	Base(Base& obj) {
+		x = obj.x;
 		cout << "Base: Base(Base& obj)\n";
 	}
 	virtual ~Base() {
@@ -64,7 +66,8 @@ int main()
 
 
 	Desc descObj;
-	func1(descObj);			// this function gets a Base object and works with it like with Base
+	descObj.x = 5;
+	func1(descObj);			// this function gets a Base object and works with it like with the object of a Base, not Desc class
 	func2(&descObj);
 	func3(descObj);
 	cout << "\n";
