@@ -35,7 +35,7 @@ public:
 };
 
 void func1(Base obj) {
-	cout << "We got an object and created its copy\n";
+	cout << "We got an object and created its copy by using copying by adress\n";
 };
 void func2(Base* obj) {
 	cout << "We got a pointer of an object\n";
@@ -64,7 +64,7 @@ int main()
 
 
 	Desc descObj;
-	func1(descObj);
+	func1(descObj);			// this function gets a Base object and works with it like with Base
 	func2(&descObj);
 	func3(descObj);
 	cout << "\n";
@@ -119,7 +119,7 @@ Base& func3() {
 						// And the pointer that will get this adress will be the hanging pointer.
 };
 Base& better_func3(Base& obj) {
-	cout << "Base& finc(Base& obj)\n";
+	cout << "Base& func(Base& obj)\n";
 	return obj;			// And here we won't get in the result any hanging pointers.
 
 	//This way of return also allows to return an adress on the dynamically initialized memory.
