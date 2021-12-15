@@ -52,7 +52,25 @@ Base& better_func3(Base& obj);
 
 int main()
 {
-	
+	Base obj;
+	func1(obj);
+	func2(&obj);
+	func3(obj);
+	cout << "\n";
+
+	Base obj2(&obj);
+	Base obj3(obj2);
+	cout << "\n";
+
+
+	Desc descObj;
+	func1(descObj);
+	func2(&descObj);
+	func3(descObj);
+	cout << "\n";
+
+	Desc descObj2(&descObj);
+	Desc descObj3(descObj2);
 
 	return 0;
 }
