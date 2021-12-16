@@ -3,6 +3,7 @@
 using namespace std;
 class Base {
 public:
+	int b = 3;
 	Base() {
 		cout << "Base: Base()\n";
 	}
