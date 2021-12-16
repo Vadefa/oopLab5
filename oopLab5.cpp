@@ -85,13 +85,13 @@ int main()
 
 
 	//Base* obj = &func4();			// That does not compile.
-	Base obj1;
-	obj1 = func4();
+	Base obj4;
+	obj4 = func4();
 
-	Base* pObj2 = func5();
-	delete pObj2;
+	Base* pObj5 = func5();
+	delete pObj5;
 
-	Base* pObj3 = &func6();
-	delete pObj3;
+	Base* pObj6 = &func6();
+	delete pObj6;
 	return 0;
 }
