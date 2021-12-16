@@ -33,7 +33,10 @@ public:
 	void method2() {
 		cout << "Point2D: method2()\n";
 	}
-
+	void method3() {
+		cout << "Point2D: method3()\n";
+		method2();
+	}
 	void overrided() {
 		cout << "Point2D: overrided()\n";
 	}
@@ -58,6 +61,7 @@ int main()
 		<< "Let's check what method will be called if we create a descendant object and call method1:\n";
 	Point2D p2d;
 	p2d.method1();
+	p2d.method3();
 
 	cout << "\n";
 
