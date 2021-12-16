@@ -46,11 +46,6 @@ void func3(Base& obj) {
 	cout << "We got an adress of an object\n";
 };
 
-Base func1();
-Base* func2();
-Base& func3();
-Base& better_func3(Base& obj);
-
 
 int main()
 {
