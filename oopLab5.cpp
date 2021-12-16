@@ -45,6 +45,9 @@ Base& func3() {
 	return obj;			// The same problem that was with func2.
 };
 
+Base foo4();
+Base* foo5();
+Base& foo6();
 
 int main()
 {	
@@ -63,8 +66,30 @@ int main()
 
 	pBase = &func3()	;		// The same problem that was above.
 
+
+	Base* pObj = &foo4();
+	Base* pObj2 = foo5();
+	delete pObj2;
+	Base* pObj3 = &foo6();
 	return 0;
 }
 
+Base foo4() {
+	cout << "Base foo4() - pointer\n";
+	Base* obj = new Base;
+	return obj;
+}
+
+Base* foo5() {
+	cout << "Base* foo5() - pointer\n";
+	Base* obj = new Base;
+	return obj;
+}
+
+Base& foo6() {
+	cout << "Base& foo6() - pointer\n";
+	Base* obj = new Base;
+	return *obj;
+}
 
 
