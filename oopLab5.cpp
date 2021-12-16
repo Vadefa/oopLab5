@@ -52,25 +52,26 @@ Base& foo6();
 int main()
 {	
 	Base obj;
-	obj = func1()	;			// This will be work.
+	obj = func1()	;				// This will be work.
 
 	
-	Base* pBase = &func1();		// That is incorrect way of using this function.
-								// An object that was returned, will be deleted on the next string after initialization/assignment.
-								// And pTempObj now adresses to released memory.
+	//Base* pBase = &func1();		// That is incorrect way of using this function. That even does not compile.
+									// An object that was returned will be deleted on the next string after initialization/assignment.
+									// And pTempObj now adresses to released memory.
 
 	
-	pBase = func2();			// We got the adress of the already released memory here.
-								// It will cause an error if we will work with this pointer somewhere.
+	Base* pBase2 = func2();			// We got the adress of the already released memory here.
+									// It will cause an error if we will work with this pointer somewhere.
 
 
-	pBase = &func3()	;		// The same problem that was above.
+	Base* pBase3 = &func3()	;		// The same problem that was above.
 
 
-	Base* pObj = &foo4();
+	//Base* pObj = &foo4();
 	Base* pObj2 = foo5();
 	delete pObj2;
 	Base* pObj3 = &foo6();
+	delete pObj3;
 	return 0;
 }
 
@@ -91,5 +92,3 @@ Base& foo6() {
 	Base* obj = new Base;
 	return *obj;
 }
-
-
