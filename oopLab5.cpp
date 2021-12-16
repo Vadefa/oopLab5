@@ -44,38 +44,44 @@ void func2(Base* obj) {
 	cout << "func2(Base* obj): we got an adress of an object\n";
 };
 void func3(Base& obj) {
-	cout << "func3(Base* obj): we got a reference of an object\n";
+	cout << "func3(Base& obj): we got a reference of an object\n";
 };
 
 void descFunc(Desc obj) {
 	cout << "descFunc: we got a descendant object and created its copy\n";
 }
+//void func1(Desc obj) {
+//	cout << "func1(Desc obj): we got a descendant object and created its copy\n";
+//}
 
 int main()
 {
-	Base obj;
-	func1(obj);
-	func2(&obj);
-	func3(obj);
+	{
+		Base obj;
+		func1(obj);
+		func2(&obj);
+		func3(obj);
+		cout << "\n";
+
+		Base obj2(&obj);
+		Base obj3(obj2);
+	}
 	cout << "\n";
+	{
+		Desc descObj;
+		descObj.x = 5;
+		func1(descObj);			// this function gets a Base object and works with it like with the object of a Base, not Desc class
+		func2(&descObj);
+		func3(descObj);
+		descFunc(descObj);		// and this function gets a Desc object and works with it correctly. Or we can just override func1.
+		//Base a;
+		//descFunc(a);			// this wouldn't compile
+		cout << "\n";
 
-	Base obj2(&obj);
-	Base obj3(obj2);
-	cout << "\n";
-
-
-	Desc descObj;
-	descObj.x = 5;
-	func1(descObj);			// this function gets a Base object and works with it like with the object of a Base, not Desc class
-	func2(&descObj);
-	func3(descObj);
-	descFunc(descObj);		// and this function gets a Desc object and works with it correctly
-	cout << "\n";
-
-	Desc descObj2(&descObj);
-	Desc descObj3(descObj2);
-	cout << "\n";
-
+		Desc descObj2(&descObj);
+		Desc descObj3(descObj2);
+		cout << "\n";
+	}
 
 	return 0;
 }
