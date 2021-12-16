@@ -45,9 +45,26 @@ Base& func3() {
 	return obj;			// The same problem that was with func2.
 };
 
-Base foo4();
-Base* foo5();
-Base& foo6();
+Base func4() {
+	cout << "Base foo4() - pointer\n";
+	Base* obj = new Base;
+
+	return *obj;							// It will create a copy of the object and return it.
+											// But previous object won't be deleted. That will cause a memory leak.
+}
+
+Base* func5() {
+	cout << "Base* foo5() - pointer\n";
+	Base* obj = new Base;
+	return obj;								// It will return an adress of the created object. But it doesn't care about its deleting.
+}
+
+Base& func6() {
+	cout << "Base& foo6() - pointer\n";
+	Base* obj = new Base;
+	return *obj;							// Returning a reference on the created object. Doesn't care about its deleting.
+}
+
 
 int main()
 {	
@@ -67,28 +84,14 @@ int main()
 	Base* pBase3 = &func3()	;		// The same problem that was above.
 
 
-	//Base* pObj = &foo4();
-	Base* pObj2 = foo5();
+	//Base* obj = &func4();			// That does not compile.
+	Base obj1;
+	obj1 = func4();
+
+	Base* pObj2 = func5();
 	delete pObj2;
-	Base* pObj3 = &foo6();
+
+	Base* pObj3 = &func6();
 	delete pObj3;
 	return 0;
-}
-
-Base foo4() {
-	cout << "Base foo4() - pointer\n";
-	Base* obj = new Base;
-	return obj;
-}
-
-Base* foo5() {
-	cout << "Base* foo5() - pointer\n";
-	Base* obj = new Base;
-	return obj;
-}
-
-Base& foo6() {
-	cout << "Base& foo6() - pointer\n";
-	Base* obj = new Base;
-	return *obj;
 }
