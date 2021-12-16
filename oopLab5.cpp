@@ -77,12 +77,23 @@ int main()
 	cout << "\n";
 
 	
-	func1();
-	func2();
-	Base* pBase = &func3();
-	//delete pBase;			// this thing will delete uninitialized memory and will cause an error
-	pBase = &better_func3(obj);
-	pBase = &better_func3(descObj);
+	Base baseObj;
+	baseObj = func1();			// This will be work.
+
+	
+	Base* pBase = &func1();		// That is incorrect way of using this function.
+								// An object that was returned, will be deleted on the next string after initialization/assignment.
+								// And pTempObj now adresses to released memory.
+
+	
+	pBase = func2();			// We got the adress of the already released memory here.
+								// It will cause an error if we will work with this pointer somewhere.
+
+
+	pBase = &func3()	;		// The same thing that was above.
+
+
+	pBase = &better_func3(obj);	// Better use func2 and func3 by getting already existed object there as the parameter.
 	cout << "\n";
 
 	return 0;
@@ -93,7 +104,8 @@ int main()
 Base func1() {
 	cout << "Base func()\n";
 	Base obj;
-	return obj; // here the compiler creates a copy of an obj and returns it
+	return obj; // here the compiler creates a copy of an obj and returns it.
+				// object that was created in the 93 string will be deleted at the "}"
 
 	//This way of return allows to work easily with static variabels and simple objects.
 	//But when we need to return arrays, pointers or complex objects we'd better use functions,..
