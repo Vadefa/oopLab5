@@ -24,7 +24,7 @@ public:
 	Point() {
 		cout << "Point()\n";
 	}
-	virtual ~Point() {
+	/*virtual */~Point() {
 		cout << "~Point\n";
 	}
 };
@@ -57,12 +57,13 @@ public:
 
 int main()
 {
-	cout << "Method 1 and method 2 are defined in the Base class. Method 2 is also overrided in the Descendant class." << endl
-		<< "Let's check what method will be called if we create a descendant object and call method1:\n";
-	Point2D p2d;
-	p2d.method1();
-	p2d.method3();
-
+	{
+		cout << "Method 1 and method 2 are defined in the Base class. Method 2 is also overrided in the Descendant class." << endl
+			<< "Let's check what method will be called if we create a descendant object and call method1:\n";
+		Point2D p2d;
+		p2d.method1();
+		p2d.method3();
+	}
 	cout << "\n";
 
 	cout << "The first case: creating a pointer of a Base class, object of a Base class:\n";
@@ -71,6 +72,7 @@ int main()
 	pointer->overlappedBase();
 	pointer->overlappedDesc();
 	delete pointer;
+	cout << "\n";
 
 	cout << "The second case: creating a pointer of a Descendant class, object of a Descendant class:\n";
 	Point2D* pointer2D = new Point2D;
@@ -78,8 +80,9 @@ int main()
 	pointer2D->overlappedBase();
 	pointer2D->overlappedDesc();
 	delete pointer2D;
+	cout << "\n";
 
-	cout << "The second case: creating a pointer of a Base class, object of a Descendant class:\n";
+	cout << "The third case: creating a pointer of a Base class, object of a Descendant class:\n";
 	Point* p = new Point2D;
 	p->overrided();
 	p->overlappedBase();
