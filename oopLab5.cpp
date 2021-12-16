@@ -57,12 +57,14 @@ Base* func5() {
 	cout << "Base* foo5() - pointer\n";
 	Base* obj = new Base;
 	return obj;								// It will return an adress of the created object. But it doesn't care about its deleting.
+
+	//This way of return allows to work with large classes and the dynamic memory faster than func1 becouse it doesn't creating many objects.
 }
 
 Base& func6() {
 	cout << "Base& foo6() - pointer\n";
 	Base* obj = new Base;
-	return *obj;							// Returning a reference on the created object. Doesn't care about its deleting.
+	return *obj;							// Almost the same. Returning a reference on the created object. Doesn't care about its deleting.
 }
 
 
