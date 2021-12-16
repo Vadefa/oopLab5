@@ -71,7 +71,7 @@ Base& func6() {
 int main()
 {	
 	Base obj;
-	obj = func1()	;				// This will be work.
+	obj = func1();					// This will work.
 
 	
 	//Base* pBase = &func1();		// That is incorrect way of using this function. That even does not compile.
