@@ -72,7 +72,6 @@ int main()
 	Base obj;
 	obj = func1();					// This will work correctly.
 
-	
 	//Base* pBase = &func1();		// That is incorrect way of using this function. That even does not compile.
 									// An object that was returned will be deleted on the next string after initialization/assignment.
 									// And pTempObj now adresses to released memory.
@@ -82,8 +81,10 @@ int main()
 									// It will cause an error if we will work with this pointer somewhere.
 	//delete pBase2;
 
+
 	Base* pBase3 = &func3()	;		// The same problem that was above.
 	//delete pBase3;
+
 
 	//Base* obj = &func4();			// That does not compile.
 	Base obj4;
