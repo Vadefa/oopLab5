@@ -17,83 +17,26 @@ public:
 	}
 };
 
-Base func1() {
-	cout << "Base func()\n";
-	Base obj;
-
-
-	return obj; // here the compiler creates a copy of an obj and returns it.
-				// An object that was created at the start will be deleted at the "}"
-
-	//This way of return allows to work easily with static variabels and simple objects.
-	//But when we need to return arrays, pointers or complex objects we'd better use functions,..
-	//..that will return adresses or pointers.
-};
-
-Base* func2() {
-	cout << "Base* func()\n";
-	Base obj;
-	return &obj;		// func3 returns an adress of the created object.
-						// But by the end of a field of the view of this function the object will be deleted..
-						// And the pointer that will get this adress will be the hanging pointer.
-};
-
-
-Base& func3() {
-	cout << "Base& func()\n";
-	Base obj;
-	return obj;			// The same problem that was with func2.
-};
-
-Base func4() {
-	cout << "Base foo4() - pointer\n";
-	Base* obj = new Base;
-
-	return *obj;							// It will create a copy of the object and return it.
-											// But previous object won't be deleted. That will cause a memory leak.
-}
-
-Base* func5() {
-	cout << "Base* foo5() - pointer\n";
-	Base* obj = new Base;
-	return obj;								// It will return an adress of the created object. But it doesn't care about its deleting.
-
-	//This way of return allows to work with large classes and the dynamic memory faster than func1 becouse it doesn't creating many objects.
-}
-
-Base& func6() {
-	cout << "Base& foo6() - pointer\n";
-	Base* obj = new Base;
-	return *obj;							// Almost the same. Returning a reference on the created object. Doesn't care about its deleting.
-}
-
-
 int main()
 {	
 	Base obj;
-	obj = func1()	;				// This will be work.
+	cout << "\n";
+	{
+		unique_ptr<Base> up1(new Base);
+		unique_ptr<Base> up2(new Base(obj));
+		unique_ptr<Base> up3(new Base(&obj));
+		//unique_ptr<Base> up4(up1);			- unique pointers can't copy yourself
+	}
+	cout << "\n";
 
-	
-	//Base* pBase = &func1();		// That is incorrect way of using this function. That even does not compile.
-									// An object that was returned will be deleted on the next string after initialization/assignment.
-									// And pTempObj now adresses to released memory.
+	{
+		shared_ptr<Base> sp1(new Base);
+		shared_ptr<Base> sp2(new Base(obj));
+		shared_ptr<Base> sp3(new Base(&obj));
 
-	
-	Base* pBase2 = func2();			// We got the adress of the already released memory here.
-									// It will cause an error if we will work with this pointer somewhere.
+		shared_ptr<Base> sp4(sp1);
+		cout << "sp1 = " << sp1 << "\nsp4 = " << sp4 << "\n";
+	}
 
-
-	Base* pBase3 = &func3()	;		// The same problem that was above.
-
-
-	//Base* obj = &func4();			// That does not compile.
-	Base obj1;
-	obj1 = func4();
-
-	Base* pObj2 = func5();
-	delete pObj2;
-
-	Base* pObj3 = &func6();
-	delete pObj3;
 	return 0;
 }
