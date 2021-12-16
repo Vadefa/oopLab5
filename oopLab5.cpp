@@ -18,7 +18,7 @@ public:
 };
 
 Base func1() {
-	cout << "Base func()\n";
+	cout << "Base func1()\n";
 	Base obj;
 	return obj; // here the compiler creates a copy of an obj and returns it.
 				// An object that was created at the start will be deleted at the "}"
@@ -29,7 +29,7 @@ Base func1() {
 };
 
 Base* func2() {
-	cout << "Base* func()\n";
+	cout << "Base* func2()\n";
 	Base obj;
 	return &obj;		// func3 returns an adress of the created object.
 						// But by the end of a field of the view of this function the object will be deleted..
@@ -37,7 +37,7 @@ Base* func2() {
 };
 
 Base& func3() {
-	cout << "Base& func()\n";
+	cout << "Base& func3()\n";
 	Base obj;
 	return obj;			// The same problem that was with func2.
 };
@@ -79,10 +79,10 @@ int main()
 	
 	Base* pBase2 = func2();			// We got the adress of the already released memory here.
 									// It will cause an error if we will work with this pointer somewhere.
-
+	//delete pBase2;
 
 	Base* pBase3 = &func3()	;		// The same problem that was above.
-
+	//delete pBase3;
 
 	//Base* obj = &func4();			// That does not compile.
 	Base obj4;
