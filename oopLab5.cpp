@@ -20,8 +20,6 @@ public:
 Base func1() {
 	cout << "Base func()\n";
 	Base obj;
-
-
 	return obj; // here the compiler creates a copy of an obj and returns it.
 				// An object that was created at the start will be deleted at the "}"
 
@@ -38,25 +36,25 @@ Base* func2() {
 						// And the pointer that will get this adress will be the hanging pointer.
 };
 
-
 Base& func3() {
 	cout << "Base& func()\n";
 	Base obj;
 	return obj;			// The same problem that was with func2.
 };
 
+
+
 Base func4() {
 	cout << "Base foo4() - pointer\n";
 	Base* obj = new Base;
-
-	return *obj;							// It will create a copy of the object and return it.
-											// But previous object won't be deleted. That will cause a memory leak.
+	return *obj;					// It will create a copy of the object and return it.
+									// But previous object won't be deleted. That will cause a memory leak.
 }
 
 Base* func5() {
 	cout << "Base* foo5() - pointer\n";
 	Base* obj = new Base;
-	return obj;								// It will return an adress of the created object. But it doesn't care about its deleting.
+	return obj;						// It will return an adress of the created object. But it doesn't care about its deleting.
 
 	//This way of return allows to work with large classes and the dynamic memory faster than func1 becouse it doesn't creating many objects.
 }
@@ -64,14 +62,14 @@ Base* func5() {
 Base& func6() {
 	cout << "Base& foo6() - pointer\n";
 	Base* obj = new Base;
-	return *obj;							// Almost the same. Returning a reference on the created object. Doesn't care about its deleting.
+	return *obj;					// Almost the same. Returning a reference on the created object. Doesn't care about its deleting.
 }
 
 
 int main()
 {	
 	Base obj;
-	obj = func1();					// This will work.
+	obj = func1();					// This will work correctly.
 
 	
 	//Base* pBase = &func1();		// That is incorrect way of using this function. That even does not compile.
