@@ -85,8 +85,7 @@ int main()
 	Base* pBase3 = &func3()	;		// The same problem that was above.
 	//delete pBase3;
 
-
-	//Base* obj = &func4();			// That does not compile.
+	//Base* tempobj = &func4();			// That does not compile.
 	Base obj4;
 	obj4 = func4();
 
